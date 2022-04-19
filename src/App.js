@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebase';
+import Login from "./components/Login";
+import Main from "./components/Main/Main";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Editor from './components/Editor/Editor';
 
-function App() {
+const App = () => {
+  const [user, loading] = useAuthState(auth);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {
+        !user ? <Login /> :
+         
+            <Router>
+              <Switch>
+                <Route path="/" exact component={Main} />
+                <Route path="/editor" exact component={Editor} />
+              </Switch>
+            </Router>
+      }
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
