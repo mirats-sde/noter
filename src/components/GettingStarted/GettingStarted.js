@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import styles from "./gettingstarted.module.css";
 import Basic from "../Basic/Basic";
 
